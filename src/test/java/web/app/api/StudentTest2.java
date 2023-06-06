@@ -35,5 +35,63 @@ public class StudentTest2 {
         //to check result:
         given().when().get(endpoint).then().log().all();
     }
+
+    @Test
+    public void testUpdateStudent1(){
+        Student body = new Student("Jonatan", "Trucks", "john_truck2@anywhere.school");
+        String endpoint = "http://localhost:8080/students/{id}";
+        int id = 1;
+        given().header("Content-Type", "application/json").body(body).
+                when().put(endpoint, id).
+                then().assertThat().
+                statusCode(200).
+                body("firstName", equalTo("Jonatan")).
+                body("email", equalTo("john_truck2@anywhere.school")).
+                log().body();
+        //to check result after update:
+        given().when().get("http://localhost:8080/students/").then().log().all();
+    }
+
+    @Test
+    public void testUpdateStudent2(){
+        Student body = new Student("Emmanuel", "Garcia", "emmanuel_ garcia@anywhere.school");
+        String endpoint = "http://localhost:8080/students/{id}";
+        int id = 2;
+        given().header("Content-Type", "application/json").body(body).
+                when().put(endpoint, id).
+                then().assertThat().statusCode(200).
+                body("firstName", equalTo("Emmanuel")).
+                body("lastName", equalTo("Garcia")).
+                body("email", equalTo("emmanuel_ garcia@anywhere.school")).
+                log().body();
+    }
+    @Test
+    public void testUpdateStudent3(){
+        Student body = new Student("Shanti", "Jackson", "david_jackson@anywhere.school");
+        String endpoint = "http://localhost:8080/students/{id}";
+        int id = 3;
+//        given().when().get("http://localhost:8080/students/").then().log().all();
+        given().header("Content-Type", "application/json").body(body).
+                when().put(endpoint, id).
+                then().assertThat().statusCode(200).
+                body("firstName", equalTo("Shanti")).
+                body("lastName", equalTo("Jackson")).
+                body("email", equalTo("david_jackson@anywhere.school")).
+                log().body();
+    }
+    @Test
+    public void testUpdateStudent3ByLastNameOnly(){
+        Student body = new Student("Shanti", "Jackson'S", "david_jackson@anywhere.school");
+        String endpoint = "http://localhost:8080/students/{id}";
+        int id = 3;
+        given().when().get("http://localhost:8080/students/").then().log().all();
+        given().header("Content-Type", "application/json").body(body).
+                when().put(endpoint, id).
+                then().assertThat().statusCode(200).
+                body("firstName", equalTo("Shanti")).
+                body("lastName", equalTo("Jackson'S")).
+                body("email", equalTo("david_jackson@anywhere.school")).
+                log().body();
+    }
 }
 
