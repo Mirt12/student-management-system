@@ -18,4 +18,8 @@ public class Student {
         this.lastName = lastName;
         this.email = email;
     }
+
+    public Student(String firstName) {
+        this.firstName = firstName;
+    }
 }
