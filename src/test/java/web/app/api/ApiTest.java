@@ -5,10 +5,11 @@ import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ApiTest {
     @Test
-    public void testGetPizzaPage() {
+    public void testGetStudents() {
         String endpoint = "http://localhost:8080/students";
         ValidatableResponse response = given().when().get(endpoint).then();
         response.log().body();
@@ -17,6 +18,13 @@ public class ApiTest {
 
     @Test
     public void testGetStudentWithId() {
+//        StudentService studentService = new StudentService();
+//        Student student = studentService.getStudentById(1);
+//        assertEquals(1, student.id());
+//        assertEquals("James", student.firstName());
+//        assertEquals("Smith", student.lastName());
+//        assertEquals("james_smith@anywhere.school", student.email());
+
         String endpoint = "http://localhost:8080/students";
         given().queryParam("id", 1)
                 .when().get(endpoint)
